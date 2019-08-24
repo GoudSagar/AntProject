@@ -49,7 +49,7 @@ pipeline {
                    groupId: 'MY-POC',
                    version: '1.0-SNAPSHOT',
                    repository: 'maven-snapshots',
-                   credentialsId: 'bd3bd97d-5179-3f74-8953-9233527e11f1',
+                   credentialsId: 'Nexus',
                        artifacts: [
                          [artifactId: 'POC-CI-CD',
                          type: 'war',
