@@ -1,28 +1,60 @@
 <?xml version="1.0" ?> 
 <project name="AntExample1" default="war" basedir=".">
-
+    
 	<path id="compile.classpath">
 		<fileset dir="WebContent/WEB-INF/lib">
 			<include name="*.jar"/>
 		</fileset>
 	</path>
+         
+
 	
 	<target name="init">
-		<mkdir dir="build/classes"/>
+		<mkdir dir="build/src/classes"/>
+                <mkdir dir="build/test/classes"/>
+                <mkdir dir="build/test/test_classes"/>
+                <mkdir dir="build/test/test_reports"/>
 		<mkdir dir="dist" />
 	</target>
-	
 	<target name="compile" depends="init" >
-		<javac destdir="build/classes" debug="true" srcdir="src">
+		<javac destdir="build/src/classes" debug="true" srcdir="src/com/vaannila">
 			<classpath refid="compile.classpath"/>
 		</javac>
+                <javac destdir="build/test/classes" debug="true" srcdir="src/com/javacodegeeks/initmocks">
+                        <classpath refid="compile.classpath"/>
+                </javac>
 	</target>
+        <!--Compiling the test cases and running unit test -->
+       <target name="test" depends="compile">
+            <javac includeantruntime="true"
+         	srcdir="test" 
+			destdir="build/test/test_classes" 
+			debug="true">
+         <classpath>
+            <pathelement path="build/test/classes"/>
+            <fileset dir="WebContent/WEB-INF/lib" includes="*.jar"/>
+         </classpath>
+      </javac>
+     <junit printsummary="true" haltonfailure="yes" fork="true">
+      <classpath>
+        <pathelement path="build/test/test_classes"/>
+        <pathelement path="build/test/classes"/>
+        <fileset dir="WebContent/WEB-INF/lib" includes="*.jar"/>
+      </classpath>
+	    <formatter type="plain"/>
+        <formatter type="xml"/>
+        <batchtest todir="build/test/test_reports">
+           <fileset dir="test" includes="**/*.java"/>
+        </batchtest>
+     </junit>
+  </target>
+
 	
-	<target name="war" depends="compile">
+	<target name="war" depends="test">
 		<war destfile="dist/AntExample.war" webxml="WebContent/WEB-INF/web.xml">
 			<fileset dir="WebContent"/>
 			<lib dir="WebContent/WEB-INF/lib"/>
-			<classes dir="build/classes"/>
+			<classes dir="build/src/classes"/>
 		</war>
 	</target>
 	
