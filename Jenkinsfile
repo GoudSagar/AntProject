@@ -30,7 +30,7 @@ pipeline {
        
       stage ('Nexus') {
              steps {
-                   nexusArtifactUploader (
+                   nexusArtifactUploader(
                    nexusVersion: 'nexus3',
                    protocol: 'http',
                    nexusUrl: '3.16.130.227:8081',
