@@ -53,7 +53,7 @@ pipeline {
                        artifacts: [
                          [artifactId: 'POC-CI-CD',
                          type: 'war',
-                         classifier: 'debug',
+                         classifier: '',
                          file: '/var/lib/jenkins/workspace/TEST_PIPELINE/dist/AntExample.war']
                        ]
                    )
