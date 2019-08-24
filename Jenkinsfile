@@ -13,22 +13,31 @@ pipeline {
                 '''
             }
         }
+       
+       stage ('Clone Source Code') {
+           steps {
+              git branch: 'master',
+              credentialsId: 'id',
+              url: 'https://github.com/GoudSagar/AntProject.git'
+           }
+        }
+
         stage ('Build') {
             steps {
-                echo 'Building'
+                echo 'Compiling and Building the Source Code'
                 sh 'ant -version'
                 sh 'ant clean war'
             }
         }
 	
-	stage ('Test') {
+	stage ('Unit Test') {
 	   steps {
-                echo 'Running Junit Tests Cases'
+                echo 'Running Unit Testing
                 sh 'ant test'
              }
          }
        
-       stage ('Sonar') {
+       stage ('Static Code Analysis') {
              environment {
              scannerHome = tool 'SONAR_SCANNER'
              }
@@ -39,8 +48,8 @@ pipeline {
                  }
             }
         }
-       
-      stage ('Nexus') {
+    
+      stage ('Artifact Deploy to Nexus') {
              steps {
                    nexusArtifactUploader(
                    nexusVersion: 'nexus3',
@@ -60,7 +69,7 @@ pipeline {
                }
           }
         
-      stage('Deploy to test') {
+      stage('Application Deployment') {
              steps {
               echo 'Deploying in Test Node On Tomcat Server'
               ansiblePlaybook( 
