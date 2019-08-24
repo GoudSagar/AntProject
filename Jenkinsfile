@@ -31,7 +31,7 @@ pipeline {
       stage ('Nexus') {
              steps {
                    nexusArtifactUploader {
-                   nexusVersion('nexus3')
+                   nexusVersion('nexus2')
                    protocol('http')
                    nexusUrl('3.16.130.227:8081')
                    groupId('MY-POC')
