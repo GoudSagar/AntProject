@@ -31,7 +31,7 @@ pipeline {
        
        stage ('Sonar')
              environment {
-             scannerHome = tool 'SonarQubeScanner'
+             scannerHome = tool 'SONAR_SCANNER'
              }
              steps {
                 echo 'Running Static Code Analysis'
