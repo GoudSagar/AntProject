@@ -29,7 +29,7 @@ pipeline {
              }
          }
        
-       stage ('Sonar')
+       stage ('Sonar') {
              environment {
              scannerHome = tool 'SONAR_SCANNER'
              }
