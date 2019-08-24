@@ -1,6 +1,18 @@
 pipeline {
     agent any
-      stages {
+      tools {  
+        ant 'ANT-1.9'
+        jdk 'JAVA_HOME'
+    }
+    stages {
+        stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "ANT_HOME = ${ANT_HOME}"
+                '''
+            }
+        }
         stage ('Build') {
             steps {
                 echo 'Building'
