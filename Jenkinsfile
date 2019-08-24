@@ -14,14 +14,6 @@ pipeline {
             }
         }
        
-       stage ('Clone Source Code') {
-           steps {
-              git branch: 'master',
-              credentialsId: 'id',
-              url: 'https://github.com/GoudSagar/AntProject.git'
-           }
-        }
-
         stage ('Build') {
             steps {
                 echo 'Compiling and Building the Source Code'
@@ -69,7 +61,7 @@ pipeline {
                }
           }
         
-      stage('Application Deployment') {
+      stage('Application Deployment using Ansible') {
              steps {
               echo 'Deploying in Test Node On Tomcat Server'
               ansiblePlaybook( 
