@@ -32,7 +32,7 @@ pipeline {
 	
 	stage ('Unit Test') {
 	   steps {
-                echo 'Running Unit Testing
+                echo 'Running Unit Testing'
                 sh 'ant test'
              }
          }
