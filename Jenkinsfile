@@ -1,15 +1,15 @@
 pipeline {
     agent any
     tools { 
-        maven 'MAVEN' 
-        jdk 'JDK_1.8'
+        ant 'ANT-1.9' 
+        jdk 'JAVA_HOME'
     }
     stages {
         stage ('Initialize') {
             steps {
                 sh '''
                     echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
+                    echo "ANT_HOME = ${ANT_HOME}"
                 ''' 
             }
         }
@@ -17,8 +17,8 @@ pipeline {
         stage ('Build') {
             steps {
                 echo ' is a minimal pipeline.'
-                sh 'mvn -v'
-                sh 'mvn clean install'
+                sh 'ant -version'
+                sh 'ant clean war'
             }
         }
     }

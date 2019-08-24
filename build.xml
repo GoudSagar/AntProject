@@ -17,10 +17,10 @@
 		<mkdir dir="dist" />
 	</target>
 	<target name="compile" depends="init" >
-		<javac destdir="build/src/classes" debug="true" srcdir="src/com/vaannila">
+		<javac includeantruntime="true"  destdir="build/src/classes" debug="true" srcdir="src/com/vaannila">
 			<classpath refid="compile.classpath"/>
 		</javac>
-                <javac destdir="build/test/classes" debug="true" srcdir="src/com/javacodegeeks/initmocks">
+                <javac includeantruntime="true" destdir="build/test/classes" debug="true" srcdir="src/com/javacodegeeks/initmocks">
                         <classpath refid="compile.classpath"/>
                 </javac>
 	</target>
