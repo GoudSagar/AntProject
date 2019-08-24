@@ -59,7 +59,15 @@ pipeline {
                    )
                }
           }
-       }
-   }  
+        
+      stage('Deploy to test'){
+             steps {
+              echo 'Deploying in Test Node On Tomcat Server'
+               sh 'ansible-playbook  site.yml'
+        }
+    }
+       
+  }
+}  
 
 
